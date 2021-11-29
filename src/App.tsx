@@ -1,24 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { HashRouter, Route, Routes } from 'react-router-dom';
+import styles from './App.scss';
+import Sheet from './components/Sheet';
+import { DataProvider } from './providers/data';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.App}>
+      <DataProvider storageKey={'data'} columns={30} rows={100}>
+        <HashRouter>
+          <Routes>
+            <Route path={'/:payload'} element={<Sheet />} />
+            <Route path={'/'} element={<Sheet />} />
+          </Routes>
+        </HashRouter>
+      </DataProvider>
     </div>
   );
 }
